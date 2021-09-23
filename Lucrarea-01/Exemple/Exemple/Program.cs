@@ -21,7 +21,7 @@ namespace Exemple
                 whenValidatedExamGrades: validatedResult => PublishExamGrades(validatedResult)
             );
 
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Program end");
         }
 
         private static List<UnvalidatedStudentGrade> ReadListOfGrades()
