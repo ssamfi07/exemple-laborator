@@ -11,7 +11,7 @@ namespace Cart
 
         static void Main(string[] args)
         {
-            EmptyCartProducts emptyCartProducts = new ();
+            // EmptyCartProducts emptyCartProducts = new ();
             var listOfProducts = ReadListOfProducts().ToArray();
             UnvalidatedCartProducts unvalidatedCartProducts = new(listOfProducts);
             ICartProducts result = ValidateCartProducts(unvalidatedCartProducts);
@@ -44,6 +44,12 @@ namespace Cart
                     break;
                 }
 
+                var priceInput = ReadValue("Price: ");
+                if (string.IsNullOrEmpty(priceInput))
+                {
+                    break;
+                }
+
                 var code = ReadValue("Code: ");
                 if (string.IsNullOrEmpty(code))
                 {
@@ -61,7 +67,7 @@ namespace Cart
                     // ClientRegistrationNumber client = new ClientRegistrationNumber(registrationNumber);
                     // Product prod = new Product(quantityInput, code, address);
                     // this way we create an unvalidated product and add it to the list
-                    listOfProducts.Add(new (registrationNumber, quantityInput, code, address));
+                    listOfProducts.Add(new (registrationNumber, quantityInput, priceInput, code, address));
                 }
                 catch
                 {
@@ -72,18 +78,18 @@ namespace Cart
         }
 
         // here we need to access the list elements and decide if each entry is valid
-        private static ICartProducts ValidateCartProducts(UnvalidatedCartProducts unvalidatedProducts) =>
-            random.Next(100) > 50 ?
-            new InvalidatedCartProducts(new List<UnvalidatedCart>(), "Random error")
-            : new ValidatedCartProducts(new List<ValidatedCart>());
+        // private static ICartProducts ValidateCartProducts(UnvalidatedCartProducts unvalidatedProducts) =>
+        //     random.Next(100) > 50 ?
+        //     new InvalidatedCartProducts(new List<UnvalidatedCart>(), "Random error")
+        //     : new ValidatedCartProducts(new List<ValidatedCart>());
 
-        private static ICartProducts ValidateCartProducts2(UnvalidatedCartProducts unvalidatedProducts) =>
-            random.Next(100) > 50 ?
-            new InvalidatedCartProducts(new List<UnvalidatedCart>(), "Random error")
-            : new ValidatedCartProducts(new List<ValidatedCart>());
+        // private static ICartProducts ValidateCartProducts2(UnvalidatedCartProducts unvalidatedProducts) =>
+        //     random.Next(100) > 50 ?
+        //     new InvalidatedCartProducts(new List<UnvalidatedCart>(), "Random error")
+        //     : new ValidatedCartProducts(new List<ValidatedCart>());
 
-        private static ICartProducts PayCartProducts(ValidatedCartProducts validCartProducts) =>
-            new PaidCartProducts(new List<ValidatedCart>(), DateTime.Now);
+        // private static ICartProducts PayCartProducts(ValidatedCartProducts validCartProducts) =>
+        //     new PaidCartProducts(new List<ValidatedCart>(), DateTime.Now);
 
             
         private static string? ReadValue(string prompt)

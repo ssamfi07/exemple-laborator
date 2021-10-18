@@ -9,10 +9,11 @@ namespace Cart.Domain
     public record Product
     {
         public int Quantity { get; }
+        public decimal Price { get; }
         public string Code { get; }
         public string Address { get; }
 
-        public Product(string quantity, string code, string address)
+        public Product(string quantity, decimal price, string code, string address)
         {
             // try parsing the quantity from string to Int32
             try
@@ -23,6 +24,17 @@ namespace Cart.Domain
             {
                 Quantity = 0;
                 throw new InvalidQuantityException($"{quantity:0.##} is an invalid quantity value.");
+            }
+
+            // try parsing the price from string to decimal
+            try
+            {
+                Price = Convert.ToDecimal(price);
+            }
+            catch
+            {
+                Price = 0;
+                throw new InvalidPriceException($"{price:0.##} is an invalid quantity value.");
             }
 
             if (!string.IsNullOrEmpty(code)) // add some regex maybe
@@ -49,6 +61,22 @@ namespace Cart.Domain
         public override string ToString()
         {
             return $"{Quantity:0.##}";
+        }
+
+        public static bool TryParseQuantity(string gradeString, out Grade grade)
+        {
+            bool isValid = false;
+            grade = null;
+            if(decimal.TryParse(gradeString, out decimal numericGrade))
+            {
+                if (IsValid(numericGrade))
+                {
+                    isValid = true;
+                    grade = new(numericGrade);
+                }
+            }
+
+            return isValid;
         }
     }
 }

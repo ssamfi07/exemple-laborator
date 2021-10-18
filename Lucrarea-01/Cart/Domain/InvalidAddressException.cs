@@ -12,6 +12,7 @@ namespace Cart.Domain
 
         public InvalidAddressException(string? message) : base(message)
         {
+            Console.WriteLine($"{message}");
         }
 
         public InvalidAddressException(string? message, Exception? innerException) : base(message, innerException)

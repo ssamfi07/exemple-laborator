@@ -15,9 +15,25 @@ namespace Cart.Domain
 
         public record EmptyCartProducts() : ICartProducts;
 
-        public record UnvalidatedCartProducts(IReadOnlyCollection<UnvalidatedCart> ProductList) : ICartProducts;
+        public record UnvalidatedCartProducts : ICartProducts
+        {
+            public UnvalidatedCartProducts(IReadOnlyCollection<UnvalidatedCart> productList)
+            {
+                ProductList = productList;
+            }
+            public IReadOnlyCollection<UnvalidatedCart> ProductList { get;}
+        }
 
-        public record InvalidatedCartProducts(IReadOnlyCollection<UnvalidatedCart> ProductList, string reason) : ICartProducts;
+        public record InvalidatedCartProducts : ICartProducts
+        {
+            internal InvalidatedCartProducts(IReadOnlyCollection<UnvalidatedCart> productList, string reason)
+            {
+                ProductList = productList;
+                Reason = reason;
+            }
+            public IReadOnlyCollection<UnvalidatedCart> ProductList { get; }
+            public string Reason { get; }
+        }
 
         public record ValidatedCartProducts(IReadOnlyCollection<ValidatedCart> ProductList) : ICartProducts;
 
