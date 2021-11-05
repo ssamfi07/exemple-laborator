@@ -1,11 +1,8 @@
 ﻿using CSharp.Choices;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Cart.Domain
+namespace Cart.Domain.Models
 {
     // choice type for 
     [AsChoice]
@@ -35,8 +32,27 @@ namespace Cart.Domain
             public string Reason { get; }
         }
 
-        public record ValidatedCartProducts(IReadOnlyCollection<ValidatedCart> ProductList) : ICartProducts;
+        public record ValidatedCartProducts : ICartProducts
+        {
+            public ValidatedCartProducts(IReadOnlyCollection<ValidatedCart> productList)
+            {
+                ProductList = productList;
+            }
+            public IReadOnlyCollection<ValidatedCart> ProductList { get;}
+        }
 
-        public record PaidCartProducts(IReadOnlyCollection<ValidatedCart> ProductList, DateTime PaidDate) : ICartProducts;
+        public record PaidCartProducts: ICartProducts
+        {
+            internal PaidCartProducts(IReadOnlyCollection<ValidatedCart> productList, DateTime paidDate, string csv)
+            {
+                ProductList = productList;
+                PaidDate = paidDate;
+                Csv = csv;
+            }
+
+            public IReadOnlyCollection<ValidatedCart> ProductList { get; }
+            public DateTime PaidDate { get; }
+            public string Csv { get; }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="CSharp.Choices" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cart.Domain\Cart.Domain.csproj" />
   </ItemGroup>
   
 </Project>

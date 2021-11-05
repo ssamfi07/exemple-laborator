@@ -1,7 +1,8 @@
-﻿using Cart.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using static Cart.Domain.CartProducts;
+using Cart.Domain;
+using Cart.Domain.Models;
+using static Cart.Domain.Models.CartProducts;
 
 namespace Cart
 {

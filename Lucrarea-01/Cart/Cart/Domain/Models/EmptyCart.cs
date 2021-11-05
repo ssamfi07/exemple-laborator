@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cart.Domain
+namespace Cart.Domain.Models
 {
     public record EmptyCart();
 }
